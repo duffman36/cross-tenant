@@ -347,7 +347,7 @@ function Create-KeyVaultAndGenerateCertificate([string]$targetTenant, `
                                                [string]$resourceTenantDomain, `
                                                [string]$resourceGrpName, `
                                                [string]$kvName, `
-                                               [string]$arLocation, `
+                                               [string]$AzureResourceLocation, `
                                                [string]$certName, `
                                                [string]$certSubj, `
                                                [string]$exoAppObjectId, `
@@ -374,7 +374,7 @@ function Create-KeyVaultAndGenerateCertificate([string]$targetTenant, `
 
     if (-not $resGrp) {
         Write-Verbose "Creating resource group - $resourceGrpName"
-        $resGrp = New-AzResourceGroup -Name $resourceGrpName -Location $arLocation
+        $resGrp = New-AzResourceGroup -Name $resourceGrpName -Location $AzureResourceLocation
         Write-Host "Resource Group $resourceGrpName successfully created" -Foreground Green
     }
 
@@ -389,7 +389,7 @@ function Create-KeyVaultAndGenerateCertificate([string]$targetTenant, `
         Write-Verbose "Keyvault $kvName already exists."
     } else {
         Write-Verbose "Creating KeyVault $kvName"
-        $kv = New-AzKeyVault -Name $kvName -Location $arLocation -ResourceGroupName $resourceGrpName
+        $kv = New-AzKeyVault -Name $kvName -Location $AzureResourceLocation -ResourceGroupName $resourceGrpName
         Write-Host "KeyVault $kvName successfully created" -Foreground Green
     }
 
